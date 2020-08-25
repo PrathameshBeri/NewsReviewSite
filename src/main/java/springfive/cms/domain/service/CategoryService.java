@@ -5,8 +5,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import springfive.cms.domain.models.Category;
 import springfive.cms.domain.repository.CategoryRepository;
+import springfive.cms.domain.utilities.Constants.DATE_TIME_LOCALES;
+import springfive.cms.domain.utilities.NewsAppException;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -49,9 +55,17 @@ public class CategoryService {
         return this.categoryRepository.findAll();
     }
 
-    public Optional<Category> findOne(String id){
+    public Category findOne(String id){
 
-        return this.categoryRepository.findById(id);
+        try {
+            Category cat = this.categoryRepository.findById(id).get();
+            return cat;
+        }catch (NoSuchElementException e){
+
+            String y = LocalDate.now(ZoneId.of(DATE_TIME_LOCALES.INDIA.getRegion())).toString() + " " + LocalTime.now(ZoneId.of(DATE_TIME_LOCALES.INDIA.getRegion())).toString();
+
+            throw new NewsAppException("Error in finding ID", e.getCause(), y);
+        }
     }
 
 
