@@ -16,14 +16,12 @@ import javax.persistence.*;
 @Table(name ="Category")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
+public class Category extends CMSObject{
 
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     String id;
-
-
 
     String name;
 

@@ -37,7 +37,8 @@ public class CategoryResource {
     })
     public ResponseEntity<Category> findOne(@PathVariable("id") String id){
 
-        return null;
+        Category cat = categoryService.findOne(id);
+        return ResponseEntity.ok(cat);
     }
 
     @GetMapping
@@ -49,6 +50,7 @@ public class CategoryResource {
     })
     public ResponseEntity<List<Category>> findAll(){
         logger.info("BERI In get all method");
+
         List<Category> cats = categoryService.findAll();
 
         return ResponseEntity.ok(cats);
@@ -61,8 +63,9 @@ public class CategoryResource {
             @ApiResponse(code = 404, message = "Catgory not found")
 
     })
-    public ResponseEntity<Category> addCategory(CategoryRequest category){
-
+    public ResponseEntity<Category> addCategory(@RequestBody CategoryRequest category){
+        logger.info("In add category controller");
+        logger.info(category.toString());
         Category cat = new Category(category.getName());
         categoryService.create(cat);
         return new ResponseEntity<>(cat, HttpStatus.CREATED);
