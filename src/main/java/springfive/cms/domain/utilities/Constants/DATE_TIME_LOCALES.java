@@ -15,5 +15,12 @@ public enum DATE_TIME_LOCALES {
         this.region = region;
     }
 
+    public String getRegion(){
+
+        return region;
+    }
+
+
+
 
 }

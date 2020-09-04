@@ -1,6 +1,8 @@
-package springfive.cms.domain.service;
+package springfive.cms.domain.services.services;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import springfive.cms.domain.models.Category;
@@ -15,12 +17,15 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+
 @Service
 @Transactional(readOnly = true)
 public class CategoryService {
 
 
     private final CategoryRepository categoryRepository;
+
+    private static final Logger logger = LogManager.getLogger("CategoryService.class");
 
     public CategoryService(CategoryRepository categoryRepository){
 
@@ -43,7 +48,7 @@ public class CategoryService {
     }
 
     @Transactional
-    public void deleteCategory(String id){
+    public void deleteCategory(int id){
 
         final Optional<Category> cat = this.categoryRepository.findById(id);
         cat.ifPresent(this.categoryRepository::delete);
@@ -55,16 +60,17 @@ public class CategoryService {
         return this.categoryRepository.findAll();
     }
 
-    public Category findOne(String id){
+    public Category findOne(int id){
 
         try {
             Category cat = this.categoryRepository.findById(id).get();
             return cat;
         }catch (NoSuchElementException e){
-
-            String y = LocalDate.now(ZoneId.of(DATE_TIME_LOCALES.INDIA.getRegion())).toString() + " " + LocalTime.now(ZoneId.of(DATE_TIME_LOCALES.INDIA.getRegion())).toString();
-
-            throw new NewsAppException("Error in finding ID", e.getCause(), y);
+            logger.info("the error is " + e.toString());
+            String y = LocalDate.now(ZoneId.of(DATE_TIME_LOCALES.INDIA.getRegion())).toString() + " " +
+                    LocalTime.now(ZoneId.of(DATE_TIME_LOCALES.INDIA.getRegion())).toString();
+            logger.info(" the time zone for the error is " + y);
+            throw new NewsAppException("Error in finding ID", e.getCause().toString(), y);
         }
     }
 
