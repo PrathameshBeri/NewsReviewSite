@@ -13,10 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springfive.cms.domain.models.Category;
-import springfive.cms.domain.service.CategoryService;
+import springfive.cms.domain.services.services.CategoryService;
 import springfive.cms.vo.CategoryRequest;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -35,8 +34,8 @@ public class CategoryResource {
             @ApiResponse(code = 404, message = "Catgory not found")
 
     })
-    public ResponseEntity<Category> findOne(@PathVariable("id") String id){
-
+    public ResponseEntity<Category> findOne(@PathVariable("id") Integer id){
+        logger.info("In FindOne Category controller");
         Category cat = categoryService.findOne(id);
         return ResponseEntity.ok(cat);
     }

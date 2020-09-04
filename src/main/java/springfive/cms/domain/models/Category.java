@@ -9,6 +9,8 @@ import org.hibernate.annotations.GenericGenerator;
 //import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 //@Document(collecton = "category")
 
 @Data
@@ -16,14 +18,17 @@ import javax.persistence.*;
 @Table(name ="Category")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category extends CMSObject{
+public class Category{
 
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
-    String id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    Integer category_id;
 
+    @Column
     String name;
+
+    @OneToMany(mappedBy = "category")
+    List<News> news = new ArrayList<>();
 
     public Category(String name) {
         this.name = name;

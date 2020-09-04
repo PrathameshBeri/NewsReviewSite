@@ -8,7 +8,7 @@ import springfive.cms.domain.models.Category;
 import java.util.List;
 
 @Service
-public interface CategoryRepository extends JpaRepository<Category, String> {
+public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
         List<Category> findByName(String name);
         List<Category> findByNameIgnoreCaseStartingWith(String name);
