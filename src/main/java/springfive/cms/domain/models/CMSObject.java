@@ -7,8 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.time.LocalDateTime;
 
-@Data
-@Entity
+
 public class CMSObject {
 
     @Column
