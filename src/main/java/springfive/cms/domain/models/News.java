@@ -4,15 +4,22 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
 public class News {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "News_id")
     Integer id;
 
     @Column
@@ -20,22 +27,24 @@ public class News {
 
     @Column
     String content;
+//
+//    @ManyToMany(mappedBy = "articles")
+//    List<User> authors = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "articles")
-    List<User> authors = new ArrayList<>();
-
+/*
     @ManyToMany
     @JoinTable(name = "News_Reviewers",
                 joinColumns = @JoinColumn(name = "News_id", referencedColumnName = "id"),
                 inverseJoinColumns = @JoinColumn(name="Reviewer_id", referencedColumnName = "id"))
     Set<User> mandatoryReviewers = new HashSet<>();
-
-    @OneToMany(mappedBy = "news")
-    Set<Review> reviews;
-
-    @ManyToOne
-    @JoinColumn(name = "Category_id", referencedColumnName = "id")
-    Category category;
+*/
+//
+//    @OneToMany(mappedBy = "news")
+//    Set<Review> reviews;
+//
+         @ManyToOne
+         @JoinColumn(name = "Category_id", referencedColumnName = "id")
+          Category category;
 //
 //    @OneToMany
 //    Set<Tag> tags;

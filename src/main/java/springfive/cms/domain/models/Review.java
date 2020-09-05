@@ -28,9 +28,9 @@ public class Review {
     @Column
     String status;
 
-    @ManyToOne
-    @JoinColumn(name = "News_id", referencedColumnName = "id")
-    News news;
+//    @ManyToOne
+//    @JoinColumn(name = "News_id", referencedColumnName = "id")
+//    News news;
 
 //
 //    @ManyToOne

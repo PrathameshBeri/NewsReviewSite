@@ -31,18 +31,17 @@ public class User {
     @Column
     Role role;
 
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @JsonIgnore
     List<Review> reviews = new ArrayList<>();
 
 
-    @ManyToMany
-    @JoinTable(
-            name = "News_Authors",
-            joinColumns = @JoinColumn(name = "User_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "News_id", referencedColumnName = "id")
-    )
-    List<News> articles = new ArrayList<>();
+//    @ManyToMany
+//    @JoinTable(
+//            name = "News_Authors",
+//            joinColumns = @JoinColumn(name = "User_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "News_id", referencedColumnName = "id")
+//    )
+//    List<News> articles = new ArrayList<>();
 
 }
