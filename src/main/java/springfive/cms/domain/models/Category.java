@@ -1,6 +1,7 @@
 package springfive.cms.domain.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,11 +23,12 @@ public class Category{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    Integer category_id;
+    Integer id;
 
     @Column
     String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "category")
     List<News> news = new ArrayList<>();
 
