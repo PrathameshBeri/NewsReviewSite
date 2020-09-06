@@ -23,6 +23,7 @@ public class Category{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
     Integer id;
 
     @Column
@@ -45,6 +46,12 @@ public class Category{
         this.name = name;
     }
 
+
+    @Override
+    public String toString(){
+
+        return "Category " + "name = " + this.getName();
+    }
 
 }
   

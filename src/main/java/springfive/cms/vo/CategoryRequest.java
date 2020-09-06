@@ -11,5 +11,4 @@ import lombok.Data;
 public class CategoryRequest {
     String name;
 
-
 }

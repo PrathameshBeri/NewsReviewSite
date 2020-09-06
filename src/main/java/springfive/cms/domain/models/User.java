@@ -35,13 +35,16 @@ public class User {
     @JsonIgnore
     List<Review> reviews = new ArrayList<>();
 
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "News_Authors",
+            joinColumns = @JoinColumn(name = "User_id", referencedColumnName = "User_id"),
+            inverseJoinColumns = @JoinColumn(name = "News_id", referencedColumnName = "News_id")
+    )
+    @JsonIgnore
+    List<News> articles = new ArrayList<>();
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "News_Authors",
-//            joinColumns = @JoinColumn(name = "User_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "News_id", referencedColumnName = "id")
-//    )
-//    List<News> articles = new ArrayList<>();
+
+
 
 }

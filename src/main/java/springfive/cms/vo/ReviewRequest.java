@@ -12,13 +12,7 @@ public class ReviewRequest {
 
     Integer id;
     String status;
-    UserRequest userRequest;
+    String user;
+    String news;
 
-    public UserRequest getUserReqeust() {
-        return userRequest;
-    }
-
-    public void setUserRequest(UserRequest usr) {
-        this.userRequest = usr;
-    }
 }

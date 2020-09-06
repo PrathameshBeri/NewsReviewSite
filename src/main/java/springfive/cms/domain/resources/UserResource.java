@@ -25,25 +25,25 @@ public class UserResource {
     UserService userService;
 
     @GetMapping(value ="/{id}")
-    public ResponseEntity<User> findOne(@PathVariable("id") Integer id){
+    public ResponseEntity<UserRequest> findOne(@PathVariable("id") Integer id){
         logger.info("In UserService class");
-        User user = userService.getOne(id);
+        UserRequest user = userService.getOne(id);
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll(){
+    public ResponseEntity<List<UserRequest>> findAll(){
 
-        List<User> userList = userService.getAll();
+        List<UserRequest> userList = userService.getAll();
         return ResponseEntity.ok(userList);
 
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody UserRequest ur){
+    public ResponseEntity<UserRequest> createUser(@RequestBody UserRequest ur){
         logger.info(ur.toString());
         logger.info(userService.toString());
-        User user = userService.addUser(ur);
+        UserRequest user = userService.addUser(ur);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 

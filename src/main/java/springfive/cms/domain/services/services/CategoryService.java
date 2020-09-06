@@ -3,6 +3,7 @@ package springfive.cms.domain.services.services;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import springfive.cms.domain.models.Category;
@@ -22,15 +23,11 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class CategoryService {
 
-
-    private final CategoryRepository categoryRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     private static final Logger logger = LogManager.getLogger("CategoryService.class");
 
-    public CategoryService(CategoryRepository categoryRepository){
-
-        this.categoryRepository = categoryRepository;
-    }
 
     @Transactional
     public Category update(Category category){

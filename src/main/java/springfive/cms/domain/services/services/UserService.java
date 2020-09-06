@@ -10,11 +10,11 @@ import java.util.List;
 
 public interface UserService {
 
-    public User getOne(int id);
+    public UserRequest getOne(int id);
 
-    public List<User> getAll();
+    public List<UserRequest> getAll();
 
-    public User addUser(UserRequest usr);
+    public UserRequest addUser(UserRequest usr);
 
     public void deleteUser(int id);
 }

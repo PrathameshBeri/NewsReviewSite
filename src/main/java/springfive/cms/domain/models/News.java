@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,21 +28,23 @@ public class News {
 
     @Column
     String content;
-//
-//    @ManyToMany(mappedBy = "articles")
-//    List<User> authors = new ArrayList<>();
 
-/*
-    @ManyToMany
-    @JoinTable(name = "News_Reviewers",
-                joinColumns = @JoinColumn(name = "News_id", referencedColumnName = "id"),
-                inverseJoinColumns = @JoinColumn(name="Reviewer_id", referencedColumnName = "id"))
-    Set<User> mandatoryReviewers = new HashSet<>();
-*/
-//
-//    @OneToMany(mappedBy = "news")
-//    Set<Review> reviews;
-//
+    @ManyToMany(mappedBy = "articles", cascade = CascadeType.ALL)
+    @JsonIgnore
+    List<User> authors = new ArrayList<>();
+
+
+//    @ManyToMany
+//    @JoinTable(name = "News_Reviewers",
+//                joinColumns = @JoinColumn(name = "News_id", referencedColumnName = "id"),
+//                inverseJoinColumns = @JoinColumn(name="Reviewer_id", referencedColumnName = "id"))
+//    Set<User> mandatoryReviewers = new HashSet<>();
+
+
+
+        @OneToMany(mappedBy = "news")
+        Set<Review> reviews;
+
          @ManyToOne
          @JoinColumn(name = "Category_id", referencedColumnName = "id")
           Category category;
