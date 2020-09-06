@@ -24,31 +24,30 @@ public class ReviewResource {
     ReviewService reviewService;
 
     @GetMapping
-    public ResponseEntity<List<Review>> getAllReviews(){
-        List<Review> reviews = reviewService.getAllReviews();
+    public ResponseEntity<List<ReviewRequest>> getAllReviews(){
+        List<ReviewRequest> reviews = reviewService.getAllReviews();
         return ResponseEntity.ok(reviews);
         }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Review> getOneReview(@PathVariable("id") Integer id){
-        Review review = reviewService.getOneReview(id);
+    public ResponseEntity<ReviewRequest> getOneReview(@PathVariable("id") Integer id){
+        logger.info("In Review resource " + id);
+        ReviewRequest review = reviewService.getOneReview(id);
         return ResponseEntity.ok(review);
     }
 
-
-
     @PostMapping
-    public ResponseEntity<Review> addReview(@RequestBody ReviewRequest reviewRequest){
+    public ResponseEntity<ReviewRequest> addReview(@RequestBody ReviewRequest reviewRequest){
 
         logger.info("In add review method " + reviewRequest.toString());
-        Review review = reviewService.addReview(reviewRequest);
+        ReviewRequest review = reviewService.addReview(reviewRequest);
         return ResponseEntity.ok(review);
     }
 
 
     @GetMapping(value = "/reviewByUser/{id}")
-    public ResponseEntity<List<Review>> getReviewsByUser(@PathVariable("id") Integer id) {
-    List<Review> reviewsByUser = reviewService.getReviewByUser(id);
+    public ResponseEntity<List<ReviewRequest>> getReviewsByUser(@PathVariable("id") Integer id) {
+    List<ReviewRequest> reviewsByUser = reviewService.getReviewByUser(id);
     return ResponseEntity.ok(reviewsByUser);
     }
 }

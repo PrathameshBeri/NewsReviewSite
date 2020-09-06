@@ -9,7 +9,9 @@ import springfive.cms.domain.models.Review;
 import springfive.cms.domain.models.User;
 import springfive.cms.domain.repository.ReviewRepository;
 import springfive.cms.domain.repository.UserRepository;
+import springfive.cms.domain.resources.ReviewResource;
 import springfive.cms.domain.services.services.ReviewService;
+import springfive.cms.domain.utilities.Mappers.ReviewMapper;
 import springfive.cms.vo.ReviewRequest;
 
 import java.util.List;
@@ -25,31 +27,38 @@ public class ReviewServiceImpl implements ReviewService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    ReviewMapper reviewMapper;
+
     @Override
-    public List<Review> getAllReviews() {
-       return reviewRepository.findAll();
+    public List<ReviewRequest> getAllReviews() {
+        List<Review> reviews = reviewRepository.findAll();
+        return reviewMapper.toReviewRequestList(reviews) ;
     }
 
     @Override
-    public Review getOneReview(int id) {
+    public ReviewRequest getOneReview(int id) {
 
-        return reviewRepository.findById(id).get();
+        Review r = reviewRepository.findById(id).get();
+        ReviewRequest rr = reviewMapper.toReviewRequest(r);
+        logger.info("In get one review class " + rr.toString());
+        return rr;
     }
 
     @Override
-    public Review addReview(ReviewRequest rs) {
+    public ReviewRequest addReview(ReviewRequest rs) {
         logger.info(rs.toString());
-        Review review = new Review();
-        User user = userRepository.findById(rs.getUserRequest().getId()).get();
-        review.setUser(user);
-        review.setStatus(rs.getStatus());
-        return reviewRepository.save(review);
+        Review review = reviewMapper.toReview(rs);
+
+        logger.info("In add review " + review.toString());
+        Review savedReview = reviewRepository.save(review);
+        return reviewMapper.toReviewRequest(savedReview);
     }
 
     @Override
-    public List<Review> getReviewByUser(Integer id) {
+    public List<ReviewRequest> getReviewByUser(Integer id) {
         List<Review> reviewsByUser= reviewRepository.findByUserId(id);
-
-        return reviewsByUser;
+        List<ReviewRequest> reviewRequestList = reviewMapper.toReviewRequestList(reviewsByUser);
+        return reviewRequestList;
     }
 }

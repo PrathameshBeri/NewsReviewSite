@@ -24,6 +24,7 @@ import java.util.List;
 public class CategoryResource {
 
     private static final Logger logger = LogManager.getLogger(CategoryResource.class);
+
     @Autowired
     CategoryService categoryService;
 
@@ -95,6 +96,7 @@ public class CategoryResource {
 
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
+
 
 
 

@@ -16,6 +16,6 @@ public interface NewsService {
 
     public NewsDTO addNews(NewsDTO news);
 
-
+    public List<NewsDTO> getNewsByCategory(String category);
 
 }
