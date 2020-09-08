@@ -18,9 +18,9 @@ public interface UserMapper {
 
     UserRequest toUserRequest(User user);
 
-    UserArticleList toUserArticleList(User user);
-
-    UserReviewsList toUserReviewsList(User user);
+//    UserArticleList toUserArticleList(User user);
+//
+//    UserReviewsList toUserReviewsList(User user);
 
     List<UserRequest> toListUserRequests(List<User> users);
 

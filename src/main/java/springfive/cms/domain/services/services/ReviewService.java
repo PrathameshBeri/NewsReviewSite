@@ -17,4 +17,6 @@ public interface ReviewService {
 
     public List<ReviewRequest> getReviewByUser(Integer id);
 
+    public Boolean deleteReview(Integer id);
+
 }

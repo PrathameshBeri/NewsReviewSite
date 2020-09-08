@@ -15,7 +15,8 @@ public class NewsReviewsDTO {
 
     Integer id;
     String title;
+    String authors;
     List<ReviewRequest> reviews;
-    List<User> moderators;
+
 
 }

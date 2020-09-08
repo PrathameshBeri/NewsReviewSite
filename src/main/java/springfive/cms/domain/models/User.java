@@ -1,16 +1,18 @@
 package springfive.cms.domain.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "user_table")
 @NoArgsConstructor
@@ -32,19 +34,21 @@ public class User {
     Role role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonBackReference
+    Set<Review> reviews = new HashSet<>();
+
+    @ManyToMany(mappedBy = "authors", cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     @JsonIgnore
-    List<Review> reviews = new ArrayList<>();
-
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(
-            name = "News_Authors",
-            joinColumns = @JoinColumn(name = "User_id", referencedColumnName = "User_id"),
-            inverseJoinColumns = @JoinColumn(name = "News_id", referencedColumnName = "News_id")
-    )
-    @JsonIgnore
-    List<News> articles = new ArrayList<>();
+    Set<News> articles = new HashSet<>();
 
 
-
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", identity='" + identity + '\'' +
+                ", name='" + name + '\'' +
+                ", role=" + role +
+                '}';
+    }
 }

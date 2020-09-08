@@ -8,6 +8,7 @@ import springfive.cms.domain.models.Review;
 import springfive.cms.vo.ReviewRequest;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper(componentModel = "spring", uses = ReviewMapperInternal.class)
 @Component

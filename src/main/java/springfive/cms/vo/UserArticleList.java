@@ -15,5 +15,5 @@ public class UserArticleList {
 
     String name;
     String identity;
-    List<NewsDTO> articlesPublished;
+    List<NewsDTO> articles;
 }

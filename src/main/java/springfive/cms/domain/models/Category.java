@@ -2,9 +2,7 @@ package springfive.cms.domain.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 //import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,7 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 //@Document(collecton = "category")
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name ="Category")
 @NoArgsConstructor

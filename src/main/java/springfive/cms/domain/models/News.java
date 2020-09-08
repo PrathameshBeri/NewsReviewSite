@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -29,9 +29,14 @@ public class News {
     @Column
     String content;
 
-    @ManyToMany(mappedBy = "articles", cascade = CascadeType.ALL)
-    @JsonIgnore
-    List<User> authors = new ArrayList<>();
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    @JoinTable(
+            name = "News_Authors",
+            joinColumns = @JoinColumn(name = "News_id", referencedColumnName = "News_id"),
+            inverseJoinColumns = @JoinColumn(name = "User_id", referencedColumnName = "User_id")
+    )
+    Set<User> authors = new HashSet<>();
 
 
 //    @ManyToMany
@@ -43,18 +48,20 @@ public class News {
 
 
         @OneToMany(mappedBy = "news")
+        @JsonIgnore
         Set<Review> reviews;
 
          @ManyToOne
          @JoinColumn(name = "Category_id", referencedColumnName = "id")
-          Category category;
+         @JsonIgnore
+         Category category;
 //
 //    @OneToMany
 //    Set<Tag> tags;
 
-    public Review review(String userId, String status){
+   /* public Review review(String userId, String status){
        return null;
-    }
+    } */
 
     public Boolean revised(){
             return null;
@@ -63,5 +70,14 @@ public class News {
 //                                            .anyMatch(review ->reviewer.id.equals(review.userId) &&
 //                                                                 "approved".equals(review.status)));
     }
- 
+
+
+    @Override
+    public String toString() {
+        return "News{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }
