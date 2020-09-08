@@ -50,4 +50,15 @@ public class ReviewResource {
     List<ReviewRequest> reviewsByUser = reviewService.getReviewByUser(id);
     return ResponseEntity.ok(reviewsByUser);
     }
+
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> deleteReview(@PathVariable("id") Integer id){
+
+        reviewService.deleteReview(id);
+
+        return ResponseEntity.ok("Deleted");
+    }
+
+
 }

@@ -9,7 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springfive.cms.domain.models.User;
 import springfive.cms.domain.services.services.UserService;
+import springfive.cms.vo.UserArticleList;
 import springfive.cms.vo.UserRequest;
+import springfive.cms.vo.UserReviewsList;
 
 import java.util.Arrays;
 import java.util.List;
@@ -63,4 +65,28 @@ public class UserResource {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(new User());
 
     }
+
+
+    @GetMapping(value = "/getArticles")
+    public ResponseEntity<UserArticleList> getAllArticles(@RequestParam("user") String user){
+
+        UserArticleList userArticleList = userService.getArticles(user);
+
+        return ResponseEntity.ok(userArticleList);
+    }
+
+
+    @GetMapping(value = "/getReviews")
+    public ResponseEntity<UserReviewsList> getReviewsByUser(@RequestParam("user") String user){
+
+        UserReviewsList   userReviewList = userService.getReviews(user);
+
+        return ResponseEntity.ok(userReviewList);
+
+    }
+
+
+
+
+
 }

@@ -18,6 +18,10 @@ public interface NewsMapper {
 
         List<NewsDTO> toNewsDTOList(List<News> news);
 
+        /**
+         * @param newsDTO
+         * @return
+         */
         News toNews(NewsDTO newsDTO);
 
 }

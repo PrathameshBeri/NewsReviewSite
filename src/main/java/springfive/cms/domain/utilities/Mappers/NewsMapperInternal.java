@@ -11,7 +11,9 @@ import springfive.cms.domain.repository.CategoryRepository;
 import springfive.cms.domain.repository.UserRepository;
 import springfive.cms.vo.UserRequest;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -33,17 +35,19 @@ public class NewsMapperInternal {
     public Category getCategory(String name){
         logger.info("In the news mapper internal");
         Category cat = categoryRepository.findByName(name);
-
         logger.info(cat.toString());
+
         return cat;
     }
 
-    public List<User> getAuthors(List<UserRequest> authors){
-
+    public Set<User> getAuthors(List<UserRequest> authors){
+    logger.info("in get authors method of  news mapper internal");
         List<String> userNames = authors.stream().
                                 collect(Collectors.mapping(UserRequest::getName, Collectors.toList()));
         List<User> users = userRepository.findByNameIn(userNames);
-        return users;
+         HashSet<User> userSet = new HashSet<>();
+         userSet.addAll(users);
+        return userSet;
     }
 
 

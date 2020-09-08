@@ -11,6 +11,7 @@ import springfive.cms.domain.models.News;
 import springfive.cms.domain.models.Review;
 import springfive.cms.domain.services.services.NewsService;
 import springfive.cms.vo.NewsDTO;
+import springfive.cms.vo.NewsReviewsDTO;
 
 
 import java.util.Arrays;
@@ -58,6 +59,14 @@ public class NewsResource {
 
         List<NewsDTO> newsDTOList = newsService.getNewsByCategory(category);
         return ResponseEntity.ok(newsDTOList);
+    }
+
+
+    @GetMapping(value = "/getReviewOnNews")
+    public ResponseEntity<NewsReviewsDTO> getNewsReview(@RequestParam("id") Integer id){
+
+        NewsReviewsDTO newsReviews = newsService.getReviews(id);
+        return ResponseEntity.ok(newsReviews);
     }
 /*
 

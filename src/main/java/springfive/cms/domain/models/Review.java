@@ -1,14 +1,13 @@
 package springfive.cms.domain.models;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -32,9 +31,14 @@ public class Review {
     @JoinColumn(name = "News_id", referencedColumnName = "News_id")
     News news;
 
-//
-//    @ManyToOne
-//    News news;
-//
 
+    @Override
+    public String toString() {
+        return "Review{" +
+                "id=" + id +
+                ", user=" + user.getName() +
+                ", status='" + status + '\'' +
+                ", news=" + news.getTitle() +
+                '}';
+    }
 }

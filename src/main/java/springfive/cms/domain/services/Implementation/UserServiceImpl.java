@@ -8,8 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 import springfive.cms.domain.models.User;
 import springfive.cms.domain.repository.UserRepository;
 import springfive.cms.domain.services.services.UserService;
+import springfive.cms.domain.utilities.Mappers.UserArticleMapper;
 import springfive.cms.domain.utilities.Mappers.UserMapper;
+import springfive.cms.domain.utilities.Mappers.UserReviewMapper;
+import springfive.cms.vo.UserArticleList;
 import springfive.cms.vo.UserRequest;
+import springfive.cms.vo.UserReviewsList;
 
 import java.util.List;
 
@@ -24,6 +28,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    UserArticleMapper userArticleMapper;
+
+    @Autowired
+    UserReviewMapper userReviewMapper;
 
     @Override
     public UserRequest getOne(int id) {
@@ -51,6 +61,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(int id) {
         userRepository.deleteById(id);
+
+    }
+
+    @Override
+    public UserArticleList getArticles(String user) {
+        User foundUser = userRepository.findByName(user);
+        return  userArticleMapper.toUserArticles(foundUser);
+    }
+
+    @Override
+    public UserReviewsList getReviews(String user) {
+        User foundUser = userRepository.findByName(user);
+        return  userReviewMapper.toUserReview(foundUser);
 
     }
 }

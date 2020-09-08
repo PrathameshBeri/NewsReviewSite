@@ -61,4 +61,13 @@ public class ReviewServiceImpl implements ReviewService {
         List<ReviewRequest> reviewRequestList = reviewMapper.toReviewRequestList(reviewsByUser);
         return reviewRequestList;
     }
+
+
+    @Override
+    public Boolean deleteReview(Integer id){
+
+        reviewRepository.deleteById(id);
+
+        return true;
+    }
 }
