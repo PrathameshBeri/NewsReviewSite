@@ -16,7 +16,7 @@ public class Review {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "review_id")
     Integer id;
 
