@@ -19,7 +19,7 @@ import javax.persistence.*;
 public class News {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "News_id")
     Integer id;
 

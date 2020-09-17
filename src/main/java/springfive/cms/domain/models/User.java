@@ -4,8 +4,11 @@ package springfive.cms.domain.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import springfive.cms.domain.utilities.Constants.DATE_TIME_LOCALES;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -20,7 +23,7 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "User_id")
     Integer id;
 
@@ -33,6 +36,9 @@ public class User {
     @Column
     Role role;
 
+    @Column
+    LocalDateTime userCreated;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @JsonBackReference
     Set<Review> reviews = new HashSet<>();
@@ -40,6 +46,14 @@ public class User {
     @ManyToMany(mappedBy = "authors", cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     @JsonIgnore
     Set<News> articles = new HashSet<>();
+
+
+    @PrePersist
+     void setDate(){
+
+        this.userCreated = LocalDateTime.now(ZoneId.of(DATE_TIME_LOCALES.INDIA.getRegion()));
+
+    }
 
 
     @Override

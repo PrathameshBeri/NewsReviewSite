@@ -22,7 +22,7 @@ class HomeControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @Test
+   // @Test
     void hello() throws Exception{
         RequestBuilder request = MockMvcRequestBuilders.get("/hello");
         MvcResult result = mvc.perform(request).andReturn();
@@ -30,7 +30,7 @@ class HomeControllerTest {
 
     }
 
-    @Test
+   // @Test
     void helloParam() throws Exception{
 
         RequestBuilder request = MockMvcRequestBuilders.get("/hello?name=Shraddha");
@@ -40,7 +40,7 @@ class HomeControllerTest {
     }
 
 
-    @Test
+    //@Test
     void tddParam() throws Exception{
 
         RequestBuilder request = MockMvcRequestBuilders.get("/trash");
