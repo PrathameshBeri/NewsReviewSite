@@ -9,6 +9,9 @@ import io.swagger.annotations.ApiResponses;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +20,7 @@ import springfive.cms.domain.services.services.CategoryService;
 import springfive.cms.vo.CategoryRequest;
 
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequestMapping("/api/category")
@@ -27,6 +31,15 @@ public class CategoryResource {
 
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    private Environment env;
+
+    @Autowired
+    private MessageSource messageSource;
+
+    @Value("${hi.prathu}")
+    private String val;
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "Find category", notes = "Find the Category by ID")
@@ -49,7 +62,9 @@ public class CategoryResource {
 
     })
     public ResponseEntity<List<Category>> findAll(){
-        logger.info("BERI In get all method");
+        logger.info("trying to inject value" + val);
+        logger.info("trying to use environment variables" + env.toString());
+        logger.info("using the messagesource" + messageSource.getMessage("hello.foo", null, new Locale("en")));
 
         List<Category> cats = categoryService.findAll();
 
